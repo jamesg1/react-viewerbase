@@ -9,6 +9,11 @@ import Toolbar from './viewer/Toolbar.js';
 import PlayClipButton from './viewer/PlayClipButton.js';
 import CineDialog from './viewer/CineDialog.js';
 import StudyList from './studyList/StudyList.js';
+import { setDragDropContext } from './utils/withDragDropContext.js';
+
+const utils = {
+  setDragDropContext
+};
 
 export {
   RoundedButtonGroup,
@@ -21,5 +26,6 @@ export {
   PlayClipButton,
   LayoutManager,
   CineDialog,
-  StudyList
+  StudyList,
+  utils
 };
