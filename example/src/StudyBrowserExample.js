@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { StudyBrowser } from 'react-viewerbase';
-import StudyBrowserExampleDropTarget from './StudyBrowserExampleDropTarget.js';
-import HTML5Backend from 'react-dnd-html5-backend';
-import { DragDropContextProvider } from 'react-dnd';
+import { StudyBrowser, ViewerbaseDragDropContext, ExampleDropTarget } from 'react-viewerbase';
 
 const exampleStudies = [
   {
@@ -85,38 +82,26 @@ class StudyBrowserExample extends Component {
   }
 
   render() {
-    const dragDropBackend = HTML5Backend;
-
     return (
-      <DragDropContextProvider backend={dragDropBackend}>
-        <div className="row">
-          <div className="col-xs-12 col-lg-6">
-            <h3>Study Browser</h3>
-            <p>
-              A simple scrollable list of image sets. Users can drag/drop data
-              from here into a panel in the layout.
-            </p>
-            <div className="study-drop-area">
-              <h4>Drag / Drop something from the Study Browser here</h4>
-              <span className="study-drop-results">
-                <StudyBrowserExampleDropTarget/>
-              </span>
-            </div>
-          </div>
-          <div className="col-xs-12 col-lg-6" style={{ height: '512px' }}>
-            <StudyBrowser
-              dragDropBackend={dragDropBackend}
-              studies={exampleStudies}
-              onThumbnailClick={this.onThumbnailClick}
-              onThumbnailDoubleClick={this.onThumbnailDoubleClick}
-              onThumbnailDrag={this.onThumbnailDrag}
-              onThumbnailDrop={this.onThumbnailDrop}
-            />
-          </div>
+      <div className="row">
+        <div className="col-xs-12 col-lg-6">
+          <h3>Study Browser</h3>
+          <p>
+            A simple scrollable list of image sets. Users can drag/drop data
+            from here into a panel in the layout.
+          </p>
+          <ExampleDropTarget/>
         </div>
-      </DragDropContextProvider>
+        <div className="col-xs-12 col-lg-6" style={{ height: '512px' }}>
+          <StudyBrowser
+            studies={exampleStudies}
+            onThumbnailClick={this.onThumbnailClick}
+            onThumbnailDoubleClick={this.onThumbnailDoubleClick}
+          />
+        </div>
+      </div>
     );
   }
 }
 
-export default StudyBrowserExample;
+export default ViewerbaseDragDropContext(StudyBrowserExample);

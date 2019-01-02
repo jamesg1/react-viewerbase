@@ -9,7 +9,8 @@ import Toolbar from './viewer/Toolbar.js';
 import PlayClipButton from './viewer/PlayClipButton.js';
 import CineDialog from './viewer/CineDialog.js';
 import StudyList from './studyList/StudyList.js';
-import { setDragDropContext } from './utils/withDragDropContext.js';
+import ViewerbaseDragDropContext from './utils/ViewerbaseDragDropContext.js';
+import ExampleDropTarget from './studyBrowser/ExampleDropTarget.js';
 
 const utils = {
   setDragDropContext
@@ -27,5 +28,6 @@ export {
   LayoutManager,
   CineDialog,
   StudyList,
-  utils
+  ViewerbaseDragDropContext,
+  ExampleDropTarget
 };

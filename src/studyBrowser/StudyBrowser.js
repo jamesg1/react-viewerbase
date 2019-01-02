@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import ThumbnailEntry from './ThumbnailEntry';
 import ThumbnailEntryDragSource from './ThumbnailEntryDragSource.js';
 import './StudyBrowser.styl';
-import { DragDropContextProvider } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+
+// TODO: Update to latest dnd-core, but the exports seem broken
 
 class StudyBrowser extends Component {
   static defaultProps = {
@@ -16,8 +16,7 @@ class StudyBrowser extends Component {
     studies: PropTypes.array.isRequired,
     supportsDragAndDrop: PropTypes.bool.isRequired,
     onThumbnailClick: PropTypes.func,
-    onThumbnailDoubleClick: PropTypes.func,
-    dragDropBackend: PropTypes.func
+    onThumbnailDoubleClick: PropTypes.func
   };
 
   render() {
@@ -37,13 +36,15 @@ class StudyBrowser extends Component {
           );
         } else {
           return (
-            <ThumbnailEntry
-              key={`${studyIndex}_${thumbIndex}`}
-              {...thumb}
-              id={`${studyIndex}_${thumbIndex}`}
-              onClick={this.props.onThumbnailClick}
-              onDoubleClick={this.props.onThumbnailDoubleClick}
-            />
+            <div className="ThumbnailEntryContainer">
+              <ThumbnailEntry
+                key={`${studyIndex}_${thumbIndex}`}
+                {...thumb}
+                id={`${studyIndex}_${thumbIndex}`}
+                onClick={this.props.onThumbnailClick}
+                onDoubleClick={this.props.onThumbnailDoubleClick}
+              />
+            </div>
           );
         }
       });
@@ -51,11 +52,9 @@ class StudyBrowser extends Component {
 
     const components = thumbnails.flat();
     return (
-      <DragDropContextProvider backend={this.props.dragDropBackend}>
-        <div className="StudyBrowser">
-          <div className="scrollable-study-thumbnails">{components}</div>
-        </div>
-      </DragDropContextProvider>
+      <div className="StudyBrowser">
+        <div className="scrollable-study-thumbnails">{components}</div>
+      </div>
     );
   }
 }
