@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { DropTarget } from 'react-dnd';
+import './ExampleDropTarget.css';
 
 // Drag sources and drop targets only interact
 // if they have the same string type.
@@ -8,48 +9,51 @@ const Types = {
 };
 
 const divTarget = {
-  drop() {
+  drop(props, monitor, component) {
+    // Note: For this example we use setState, but in
+    // OHIF we will update the redux store instead
+    const item = monitor.getItem();
+
+    component.setState({ item });
     return { id: 'ExampleDropTarget' };
   }
 };
 
 // TODO: Find out why we can't move this into the Example app instead.
 // It looks like the context isn't properly shared.
-
-console.warn('StudyBrowserExampleDropTarget');
-
 class ExampleDropTarget extends Component {
+  static className = 'ExampleDropTarget';
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      item: null
+    };
+  }
+
   render() {
     const { canDrop, isOver, connectDropTarget } = this.props;
     const isActive = canDrop && isOver;
 
-    let backgroundColor = '#fafafa';
-    let color = 'black';
-    let borderColor = 'black';
+    let className = ExampleDropTarget.className;
+
     if (isActive) {
-      backgroundColor = 'black';
-      color = 'var(--active-color)';
-      borderColor = 'white';
+      className += ' hovered';
     } else if (canDrop) {
-      backgroundColor = 'black';
-      color = 'white';
-      borderColor = 'white';
+      className += ' can-drop';
     }
 
     return connectDropTarget(
-      <div
-        className="StudyBrowserExampleDropTarget"
-        style={{
-          color,
-          borderColor,
-          backgroundColor,
-          width: '100%',
-          height: '100px'
-        }}
-      >
-        <h4>Drag / Drop something from the Study Browser here</h4>
-        {isActive ? 'Release to drop' : 'Drag a box here'}
-        <span className="study-drop-results" />
+      <div className={className}>
+        <h4>
+          {isActive
+            ? 'Release to drop'
+            : 'Drag / Drop something from the Study Browser here'}
+        </h4>
+        <p className="study-drop-results">
+          {this.state.item && JSON.stringify(this.state.item)}
+        </p>
       </div>
     );
   }

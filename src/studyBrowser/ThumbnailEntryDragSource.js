@@ -18,13 +18,10 @@ const thumbnailSource = {
     console.log('beginDrag');
     console.log(props);
 
-    return {
-      id: props.id
-    };
+    return props;
   },
 
   endDrag(props, monitor) {
-    console.log('endDrag');
     const item = monitor.getItem();
     const dropResult = monitor.getDropResult();
 

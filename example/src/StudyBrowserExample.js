@@ -64,19 +64,11 @@ const exampleStudies = [
 ];
 
 class StudyBrowserExample extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onThumbnailDoubleClick = this.onThumbnailDoubleClick.bind(this);
-    this.onThumbnailClick = this.onThumbnailClick.bind(this);
-    debugger;
-  }
-
-  onThumbnailClick() {
+  onThumbnailClick = () => {
     console.warn('onThumbnailClick');
     console.warn(this);
   }
-  onThumbnailDoubleClick() {
+  onThumbnailDoubleClick = () => {
     console.warn('onThumbnailDoubleClick');
     console.warn(this);
   }

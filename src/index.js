@@ -12,10 +12,6 @@ import StudyList from './studyList/StudyList.js';
 import ViewerbaseDragDropContext from './utils/ViewerbaseDragDropContext.js';
 import ExampleDropTarget from './studyBrowser/ExampleDropTarget.js';
 
-const utils = {
-  setDragDropContext
-};
-
 export {
   RoundedButtonGroup,
   LayoutChooser,

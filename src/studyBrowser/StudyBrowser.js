@@ -4,8 +4,6 @@ import ThumbnailEntry from './ThumbnailEntry';
 import ThumbnailEntryDragSource from './ThumbnailEntryDragSource.js';
 import './StudyBrowser.styl';
 
-// TODO: Update to latest dnd-core, but the exports seem broken
-
 class StudyBrowser extends Component {
   static defaultProps = {
     studies: [],
